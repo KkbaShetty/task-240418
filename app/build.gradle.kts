@@ -22,9 +22,19 @@ android {
         }
     }
 
+    signingConfigs {
+        create("keyDemo") {
+            keyAlias = "keyTechieKK"
+            keyPassword = "TechieKKS@24"
+            storeFile = file("key/TechieButler")
+            storePassword = "TechieKKS@24"
+        }
+    }
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("keyDemo")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -84,4 +94,9 @@ dependencies {
 
     androidTestImplementation(libs.hilt.android.testing)
     kspAndroidTest(libs.hilt.android.compiler)
+
+    implementation(libs.coil.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.paging.compose)
+
 }
