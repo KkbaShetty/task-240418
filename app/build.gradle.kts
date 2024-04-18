@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.daggerHilt)
 }
 
 android {
@@ -63,4 +65,23 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    implementation(libs.coroutines.test)
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+
+    implementation(libs.okhttp.logger)
+    implementation(libs.squareup.retofit)
+    implementation(libs.squareup.retofit.gson)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.android.hilt.navigation)
+
+    androidTestImplementation(libs.hilt.android.testing)
+    kspAndroidTest(libs.hilt.android.compiler)
 }
