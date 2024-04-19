@@ -8,10 +8,6 @@ import retrofit2.HttpException
 import retrofit2.awaitResponse
 import java.io.IOException
 
-object NetworkConstants {
-    const val BASE_URL = "https://jsonplaceholder.typicode.com/"
-}
-
 suspend fun <D> doApiCall(apiCall: suspend () -> Call<D>): DataResult<D, DataError> {
     return try {
         val response = apiCall().awaitResponse()

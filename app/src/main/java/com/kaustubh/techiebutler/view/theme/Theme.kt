@@ -17,7 +17,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = ButlerBlue,
+    primary = ButlerOrange,
     secondary = ButlerOrange,
     tertiary = ButlerYellow,
     onPrimary = Color.White,
@@ -50,7 +50,7 @@ fun TechieButlerTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
+            window.statusBarColor = ButlerBlue.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }

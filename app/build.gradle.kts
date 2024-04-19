@@ -91,12 +91,11 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.android.hilt.navigation)
-
     androidTestImplementation(libs.hilt.android.testing)
     kspAndroidTest(libs.hilt.android.compiler)
 
     implementation(libs.coil.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.paging.compose)
 
+    implementation(libs.paging.compose)
 }
