@@ -11,7 +11,6 @@ sealed interface ResultError
 enum class DataError : ResultError {
     PARSE_ERROR,
     NO_INTERNET,
-    TIME_OUT,
     UNAUTHORIZED,
     OTHERS,
 }

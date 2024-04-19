@@ -2,11 +2,10 @@ package com.kaustubh.techiebutler.view.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -36,7 +35,6 @@ fun AppTopBarWithBack(screenTitle: String) {
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Color.Transparent,
-            titleContentColor = MaterialTheme.colorScheme.primary,
         ),
         navigationIcon = { BackIconButton() },
         title = { Text(text = screenTitle) },
@@ -51,7 +49,7 @@ fun BackIconButton(
         appNavViewModel.goBack()
     }) {
         Icon(
-            imageVector = Icons.Filled.ArrowBack,
+            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = "Back Icon"
         )
     }

@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.google.gson.Gson
 import com.kaustubh.techiebutler.model.TypeCodeItem
 import com.kaustubh.techiebutler.navigation.AppNavViewModel

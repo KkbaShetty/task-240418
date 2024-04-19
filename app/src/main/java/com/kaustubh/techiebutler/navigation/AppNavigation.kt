@@ -9,8 +9,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 object AppRoutes {
-    val landingPage = "landingPage"
-    val detailsPage = "detailsPage/{post}"
+    const val landingPage = "landingPage"
+    const val detailsPage = "detailsPage/{post}"
 }
 
 @HiltViewModel
