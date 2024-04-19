@@ -1,6 +1,6 @@
 package com.kaustubh.techiebutler.data.remote.di
 
-import com.kaustubh.techiebutler.data.NetworkConstants.BASE_URL
+import com.kaustubh.techiebutler.data.remote.NetworkConstants.BASE_URL
 import com.kaustubh.techiebutler.data.remote.services.ApiServices
 import dagger.Module
 import dagger.Provides

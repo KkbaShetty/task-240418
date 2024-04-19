@@ -2,14 +2,14 @@ package com.kaustubh.techiebutler.domain.page
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.kaustubh.techiebutler.data.NetworkConstants.PAGE_SIZE
+import com.kaustubh.techiebutler.data.remote.NetworkConstants.PAGE_SIZE
 import com.kaustubh.techiebutler.domain.repo.DataServices
 import com.kaustubh.techiebutler.model.TypeCodeItem
 import retrofit2.HttpException
 import java.io.IOException
 
 class TypeCodePostsSource(
-    val dataServices: DataServices
+    private val dataServices: DataServices
 ) : PagingSource<Int, TypeCodeItem>() {
     override fun getRefreshKey(state: PagingState<Int, TypeCodeItem>): Int? {
         return state.anchorPosition
