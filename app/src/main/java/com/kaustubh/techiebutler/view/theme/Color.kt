@@ -10,4 +10,5 @@ val ButlerYellow = Color(0xFFc58639)
 //val IdTextColor = Color(0xFF000000)
 val IdBackgroundColor = ButlerBlue
 val IdTextColor = Color(0xFFEEEEEE)
-val CardBackgroundColor = Color(0xFFFFCC99)
+val CardBackgroundColorPosts = Color(0xFFFFCC99)
+val CardBackgroundColorComments = Color(0xFFFFE7B9)

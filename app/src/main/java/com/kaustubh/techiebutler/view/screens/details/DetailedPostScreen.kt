@@ -29,6 +29,6 @@ fun DetailedPost(
             .padding(innerPadding)
             .padding(horizontal = 16.dp)
     ) {
-        PostCard(post)
+        PostCard(post, true)
     }
 }

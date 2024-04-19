@@ -13,7 +13,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -22,13 +21,15 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kaustubh.techiebutler.model.TypeCodeItem
-import com.kaustubh.techiebutler.view.theme.CardBackgroundColor
+import com.kaustubh.techiebutler.view.screens.comments.CommentsScreen
+import com.kaustubh.techiebutler.view.theme.CardBackgroundColorPosts
 import com.kaustubh.techiebutler.view.theme.IdBackgroundColor
 import com.kaustubh.techiebutler.view.theme.IdTextColor
 
 @Composable
 fun PostCard(
     item: TypeCodeItem,
+    showComments: Boolean = false,
     onItemClicked: (TypeCodeItem) -> Unit = { }
 ) {
     Card(
@@ -39,13 +40,14 @@ fun PostCard(
                 onItemClicked(item)
             },
         colors = CardDefaults.cardColors(
-            containerColor = CardBackgroundColor
+            containerColor = CardBackgroundColorPosts
         )
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(vertical = 12.dp, horizontal = 12.dp),
+                .padding(horizontal = 12.dp)
+                .padding(top = 12.dp),
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -77,7 +79,9 @@ fun PostCard(
                 maxLines = 2,
                 fontSize = 15.sp,
                 lineHeight = 18.sp,
-                modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp),
                 fontWeight = FontWeight.Bold,
                 textDecoration = TextDecoration.Underline,
             )
@@ -90,8 +94,14 @@ fun PostCard(
                 textAlign = TextAlign.Start,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 4.dp),
+                    .padding(top = 4.dp, bottom = 12.dp),
             )
+
+            if (showComments) {
+                item.id?.let {
+                    CommentsScreen(it)
+                }
+            }
         }
     }
 }
