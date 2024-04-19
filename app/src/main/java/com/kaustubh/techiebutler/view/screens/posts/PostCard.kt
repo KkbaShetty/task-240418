@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -44,11 +45,10 @@ fun PostCard(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(vertical = 12.dp, horizontal = 16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(vertical = 12.dp, horizontal = 12.dp),
         ) {
             Row(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
@@ -76,7 +76,8 @@ fun PostCard(
                 color = Color.Black,
                 maxLines = 2,
                 fontSize = 15.sp,
-                modifier = Modifier.fillMaxSize(),
+                lineHeight = 18.sp,
+                modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
                 fontWeight = FontWeight.Bold,
                 textDecoration = TextDecoration.Underline,
             )
@@ -84,9 +85,12 @@ fun PostCard(
                 text = item.body ?: "",
                 color = Color.Black,
                 maxLines = 6,
-                fontSize = 13.sp,
-                textAlign = TextAlign.Justify,
-                modifier = Modifier.fillMaxSize(),
+                fontSize = 14.sp,
+                lineHeight = 15.sp,
+                textAlign = TextAlign.Start,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 4.dp),
             )
         }
     }

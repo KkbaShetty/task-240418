@@ -20,7 +20,6 @@ class PostsListViewModel @Inject constructor(
 ) : ViewModel() {
     val postsList: Flow<PagingData<TypeCodeItem>> = Pager(PagingConfig(
         pageSize = PAGE_SIZE,
-        prefetchDistance = 2,
         enablePlaceholders = true,
     )) {
         TypeCodePostsSource(dataServices)

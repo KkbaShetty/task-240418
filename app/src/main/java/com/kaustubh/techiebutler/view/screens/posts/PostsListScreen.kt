@@ -18,12 +18,14 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.kaustubh.techiebutler.model.TypeCodeItem
+import com.kaustubh.techiebutler.navigation.AppNavViewModel
 import com.kaustubh.techiebutler.view.components.AppLoadingScreen
 import com.kaustubh.techiebutler.viewmodel.PostsListViewModel
 
 @Composable
 fun PostsListScreen(
     viewModel: PostsListViewModel = hiltViewModel(),
+    navViewModel: AppNavViewModel = hiltViewModel(),
 ) {
     val items: LazyPagingItems<TypeCodeItem> = viewModel.postsList.collectAsLazyPagingItems()
 
@@ -35,14 +37,16 @@ fun PostsListScreen(
     if (listItems == null || listItems?.itemCount == 0) {
         AppLoadingScreen()
     } else {
-        PostsListView(listItems)
+        PostsListView(listItems) {
+            navViewModel.navigateToScreenDetailsPage(it)
+        }
     }
 }
 
 @Composable
 fun PostsListView(
     items: LazyPagingItems<TypeCodeItem>?,
-    onItemClicked: (TypeCodeItem) -> Unit = { }
+    onItemClicked: (TypeCodeItem) -> Unit
 ) {
     items ?: return
 
