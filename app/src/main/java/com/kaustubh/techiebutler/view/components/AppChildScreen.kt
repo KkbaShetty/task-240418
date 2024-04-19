@@ -12,17 +12,20 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.kaustubh.techiebutler.navigation.AppNavViewModel
+import androidx.navigation.NavHostController
+import com.kaustubh.techiebutler.navigation.navigateBack
 
 @Composable
 fun AppChildScreen(
     screenTitle: String,
+    navController: NavHostController,
     innerScreen: @Composable (PaddingValues) -> Unit
 ) {
     Scaffold(
         topBar = {
-            AppTopBarWithBack(screenTitle)
+            AppTopBarWithBack(screenTitle) {
+                navController.navigateBack()
+            }
         },
     ) { innerPadding ->
         innerScreen(innerPadding)
@@ -31,22 +34,27 @@ fun AppChildScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppTopBarWithBack(screenTitle: String) {
+fun AppTopBarWithBack(
+    screenTitle: String,
+    onBackClicked: () -> Unit
+) {
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Color.Transparent,
         ),
-        navigationIcon = { BackIconButton() },
+        navigationIcon = {
+            BackIconButton {
+                onBackClicked()
+            }
+        },
         title = { Text(text = screenTitle) },
     )
 }
 
 @Composable
-fun BackIconButton(
-    appNavViewModel: AppNavViewModel = hiltViewModel()
-) {
+fun BackIconButton(onBackClicked: () -> Unit) {
     IconButton(onClick = {
-        appNavViewModel.goBack()
+        onBackClicked()
     }) {
         Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,

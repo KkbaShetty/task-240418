@@ -8,12 +8,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.google.gson.Gson
 import com.kaustubh.techiebutler.model.TypeCodeItem
-import com.kaustubh.techiebutler.navigation.AppNavViewModel
 import com.kaustubh.techiebutler.navigation.AppRoutes
 import com.kaustubh.techiebutler.view.screens.details.DetailedPostScreen
 import com.kaustubh.techiebutler.view.screens.launch.LaunchScreen
@@ -37,22 +37,27 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TechieButlerAppScreens() {
-    val navStack = hiltViewModel<AppNavViewModel>()
-    val navController = navStack.controller
+    val navController = rememberNavController()
+    AppNavGraph(navController)
+}
+
+@Composable
+fun AppNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = AppRoutes.landingPage
     ) {
         composable(AppRoutes.landingPage) {
-            LaunchScreen()
+            LaunchScreen(navController)
         }
 
         composable(AppRoutes.detailsPage) {
             val task = it.arguments?.getString("post")
-            if (task.isNullOrEmpty()) {
-                DetailedPostScreen(TypeCodeItem())
-            } else {
-                DetailedPostScreen(Gson().fromJson(task, TypeCodeItem::class.java))
+            if (!task.isNullOrEmpty()) {
+                DetailedPostScreen(
+                    navController,
+                    Gson().fromJson(task, TypeCodeItem::class.java)
+                )
             }
         }
     }

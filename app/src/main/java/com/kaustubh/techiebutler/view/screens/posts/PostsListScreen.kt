@@ -18,14 +18,13 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.kaustubh.techiebutler.model.TypeCodeItem
-import com.kaustubh.techiebutler.navigation.AppNavViewModel
 import com.kaustubh.techiebutler.view.components.AppLoadingScreen
 import com.kaustubh.techiebutler.viewmodel.PostsListViewModel
 
 @Composable
 fun PostsListScreen(
     viewModel: PostsListViewModel = hiltViewModel(),
-    navViewModel: AppNavViewModel = hiltViewModel(),
+    onItemClicked: (TypeCodeItem) -> Unit
 ) {
     val items: LazyPagingItems<TypeCodeItem> = viewModel.postsList.collectAsLazyPagingItems()
 
@@ -33,22 +32,17 @@ fun PostsListScreen(
     LaunchedEffect(key1 = items) {
         listItems = items
     }
-
-    if (listItems == null || listItems?.itemCount == 0) {
-        AppLoadingScreen()
-    } else {
-        PostsListView(listItems) {
-            navViewModel.navigateToScreenDetailsPage(it)
-        }
+    PostsListView(listItems) {
+        onItemClicked(it)
     }
 }
 
 @Composable
 fun PostsListView(
-    items: LazyPagingItems<TypeCodeItem>?,
+    pagination: LazyPagingItems<TypeCodeItem>?,
     onItemClicked: (TypeCodeItem) -> Unit
 ) {
-    items ?: return
+    pagination ?: return
 
     val listState: LazyListState = rememberLazyListState()
     LazyColumn(
@@ -57,19 +51,29 @@ fun PostsListView(
         contentPadding = PaddingValues(16.dp),
     ) {
         items(
-            count = items.itemCount,
-            key = { items.peek(it)?.id ?: 0 },
+            count = pagination.itemCount,
+            key = { pagination.peek(it)?.id ?: 0 },
         ) { index ->
-            val item = items[index]
+            val item = pagination[index]
             if (item != null) {
                 PostCard(item = item) {
                     onItemClicked(item)
                 }
             }
         }
-    }
 
-    if (items.loadState.append == LoadState.Loading) {
-        AppLoadingScreen()
+        if (pagination.loadState.refresh == LoadState.Loading) {
+            for (count in 0..3) {
+                item {
+                    PostCardShimmer()
+                }
+            }
+        }
+
+        if (pagination.loadState.append == LoadState.Loading) {
+            item {
+                AppLoadingScreen()
+            }
+        }
     }
 }

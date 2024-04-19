@@ -98,4 +98,5 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
 
     implementation(libs.paging.compose)
+    implementation(libs.compose.shimmer)
 }
